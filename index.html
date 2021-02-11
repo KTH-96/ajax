@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>WEB-1</title>
-	<link rel="stylesheet" href="style.css">
+
 	<script
 	 src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-  </script>
+  	</script>
 	<script src="colors.js"></script>
 </head>
 <body>
@@ -14,31 +14,49 @@
 			nightDayHandler(this);
 		">
 
-	<h1 id="indexh1"><a href="index.html">WEB</a></h1>
+	<h1><a href="#!welcome" onclick="fetchPage('welcome')">WEB</a></h1>
 
-			<iframe width="100%" height="502"
-			 src="https://www.youtube.com/embed/7T7r_oSp0SE?list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb"
-			 frameborder="0"
-			 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-			 allowfullscreen>
-			</iframe>
-
-	<div id="grid" class="index">
-
-		<ol>
-			<li><a href="1.html.html">HTML</a></li>
-		  <li><a href="2.css.html">CSS</a></li>
-		  <li><a href="3.javascript.html">JavaScript</a></li>
+		<ol id="nav">
+		  
 		</ol>
 
-		<div id="article">
-			<h2>WEB</h2>
-			<img src="img/window-1.jpg" width=50%;>
-				<p>
-					The World Wide Web (WWW), commonly known as the Web, is an information system where documents and other web resources are identified by Uniform Resource Locators (URLs, such as https://example.com/), which may be interlinked by hypertext, and are accessible over the Internet.[1][2] The resources of the Web are transferred via the Hypertext Transfer Protocol (HTTP), may be accessed by users by a software application called a web browser, and are published by a software application called a web server. The World Wide Web is not synonymous with the Internet, which pre-existed the Web in some form by over two decades and upon which technologies the Web is built.
-				</p>
-
-		</div>
-	</div>
+		<article>
+			
+		</article>
+			
+		<script type="text/javascript">
+		function fetchPage(name){
+			fetch(name).then(function(response){
+	     		response.text().then(function(text){
+	 				document.querySelector('article').innerHTML = text;
+	     		})
+	   		})
+		}
+		
+		if(location.hash){
+			fetchPage(location.hash.substr(2));
+		} else {
+			fetchPage('welcome');
+		}
+		
+		fetch('list').then(function(response){
+     		response.text().then(function(text){
+     			console.log(text);
+     			var items = text.split(',');
+     			var i = 0;
+     			var tags = '';
+     			while(i<items.length){
+     				var item = items[i];
+     				item = item.trim();
+     				//<li><a href="#!html" onclick="fetchPage('html')">HTML</a></li>
+					var tag = '<li><a href="#!'+item+'" onclick="fetchPage(\''+item+'\')">'+item+'</a></li>';
+					console.log(tag);
+					tags += tag;
+     				i++;
+     			}
+ 				document.querySelector('#nav').innerHTML = tags;
+     		})
+   		})
+		</script>
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+	<article>
+	
+ 	</article>
+    <input type="button" value="fetch" onclick="
+    /*
+      fetch('css').then(function(response){
+        response.text().then(function(text){
+    		document.querySelector('article').innerHTML = text;
+        })
+      })
+      */
+      //Asynchronous:비동기
+   /* 
+   	  function callbackme(){
+    	console.log('response end');
+      }
+      callbackme = function(){
+      	console.log('response end');
+      }
+    */
+    //익명합수
+      fetch('html').then(function(response){
+      	console.log(response.status);
+      	if(response.status == '404'){
+      		alert('Not found');
+      	}
+      });
+     //fetch('html').then(callbackme);
+     ">
+  </body>
+</html>
